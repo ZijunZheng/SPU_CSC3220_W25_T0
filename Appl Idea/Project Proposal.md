@@ -5,6 +5,7 @@ Single Player Deck Building Card Game
   Cards added to "Collection" when lootbox opened
     Lootbox uses RNG to determine card data retrieved from LootTable to be used in the formation of a new Card object within the "Collection"
       "Collection" uses an entity table
+      "Collection" is persistent between launches
   Cards in "Collection" can be added to "Decks"
     Decks use entity tables
     Decks can be created and destroyed
@@ -19,6 +20,8 @@ Single Player Deck Building Card Game
       The Draw, cards to be added to the hand
       When Cards change portions they are updated
       These portions will be where the majority of database operations occur in a game
+    In progress games will have the "Active Deck" saved persistently every round. 
+    
   Settings Tab
       User will be able use a slider to either turn down or up the volume
       User will be able to change the font or the size of the font
