@@ -19,3 +19,6 @@ Single Player Deck Building Card Game
       The Draw, cards to be added to the hand
       When Cards change portions they are updated
       These portions will be where the majority of database operations occur in a game
+  Settings Tab
+      User will be able use a slider to either turn down or up the volume
+      User will be able to change the font or the size of the font
