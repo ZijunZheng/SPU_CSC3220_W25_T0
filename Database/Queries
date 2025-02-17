@@ -1,0 +1,27 @@
+#Shows cards that are not creatures with fast speed
+SELECT Name, RarityType, CardType, CastSpeed
+FROM Rarity R, Card C, Spell S, Speed Sp
+WHERE R.RarityID = C.RarityID
+AND S.CardID = C.CardID
+AND S.SpeedID = Sp.SpeedID
+AND CardType != 'C'
+AND S.SpeedID = '1'
+
+#Shows Cards and Decks in Decklist
+SELECT DeckName, Name, L.NumberOfCards
+FROM Deck D, Decklist L, Card C
+WHERE C.CardID = L.CardID
+AND L.DeckID = D.DeckID
+
+#Shows the number of cards in each pile
+SELECT Name, PileType, COUNT(*)
+FROM BoardState B, Card C, Pile P
+WHERE C.CardID = B.CardID
+AND P.PileID = B.PileID
+GROUP BY Name, PileType
+
+#Shows the average mana cost of a deck
+SELECT DeckName, AVG(Cost) AS AverageMana
+FROM Decklist L, Deck D, Card C
+WHERE D.DeckID = L.DeckID
+AND C.CardID = L.CardID
