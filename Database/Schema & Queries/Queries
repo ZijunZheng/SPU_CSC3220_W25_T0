@@ -27,14 +27,32 @@ WHERE D.DeckID = L.DeckID
 AND C.CardID = L.CardID
 
 
-#Increases the number of copies of a specific card in a specific deck by one
+#Increases the number of copies of a specific card in a specific deck by one, DOES NOT update Boardstate
+#To my understanding, the deck shouldn't be changed during a match. This should not be used on a nonexistent deck.
 BEGIN TRANSACTION;
 UPDATE Decklist
 SET NumberOfCards = NumberOfCards + 1
-WHERE CardID = 1 AND DeckID = 2;
+WHERE CardID = 1 AND DeckID = 1;
 UPDATE Deck
 SET DeckSize = DeckSize + 1
-WHERE Deck.DeckID = 2;
+WHERE Deck.DeckID = 1;
 COMMIT;
 
-#
+#Similar to the above, but for adding a card with no copies
+BEGIN TRANSACTION;
+UPDATE Deck
+SET DeckSize = DeckSize + 1
+WHERE Deck.DeckID = 1;
+INSERT INTO Decklist(NumberOfCards,DeckID,cardId)
+VALUES (1,1,4);
+COMMIT;
+
+#Reverse to above, removes card from deck and decrements
+BEGIN TRANSACTION;
+UPDATE Deck
+SET DeckSize = DeckSize - (SELECT NumberOfCards FROM Decklist WHERE CardID = 4)
+WHERE Deck.DeckID = 1;
+DELETE 
+FROM Decklist 
+WHERE DeckID = 1 AND CardID = 4;
+COMMIT;
