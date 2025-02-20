@@ -27,7 +27,7 @@ WHERE D.DeckID = L.DeckID
 AND C.CardID = L.CardID
 
 
-#Deletes Increases the number of copies of a specific card in a specific deck by one
+#Increases the number of copies of a specific card in a specific deck by one
 BEGIN TRANSACTION;
 UPDATE Decklist
 SET NumberOfCards = NumberOfCards + 1
