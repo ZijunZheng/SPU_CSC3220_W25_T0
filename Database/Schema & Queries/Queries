@@ -25,3 +25,16 @@ SELECT DeckName, AVG(ManaCost) AS AverageMana
 FROM Decklist L, Deck D, Card C
 WHERE D.DeckID = L.DeckID
 AND C.CardID = L.CardID
+
+
+#Deletes Increases the number of copies of a specific card in a specific deck by one
+BEGIN TRANSACTION;
+UPDATE Decklist
+SET NumberOfCards = NumberOfCards + 1
+WHERE CardID = 1 AND DeckID = 2;
+UPDATE Deck
+SET DeckSize = DeckSize + 1
+WHERE Deck.DeckID = 2;
+COMMIT;
+
+#
